@@ -52,11 +52,12 @@ const automate = async (text) => {
         { waitUntil: "networkidle0" }
       );
       await page.waitForTimeout(2000);
-      if(!await page.focus(`textarea[placeholder="What's on your mind?"]`))  
+      const textbox = await page.$(`textarea[placeholder="What's on your mind?"]`)
+      if(!textbox)  
         continue;
       else
         {
-          await page.focus(`textarea[placeholder="What's on your mind?"]`);
+          await textbox.focus();
           await page.keyboard.down("Control");
           await page.keyboard.press(String.fromCharCode(86));
           await page.keyboard.up("Control");
